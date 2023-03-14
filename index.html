@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>CSS Template</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script type="text/javascript" src="script.js"></script>
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Style the header */
+header {
+  background-color: #666;
+  padding: 30px;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+}
+
+/* Create two columns/boxes that floats next to each other */
+nav {
+  float: left;
+  width: 50%;
+
+  background: #ccc;
+  padding: 20px;
+}
+
+/* Style the list inside the menu */
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+
+article {
+  float: left;
+  padding: 20px;
+  width: 50%;
+  background-color: #f1f1f1;
+}
+
+/* Clear floats after the columns */
+section::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the footer */
+footer {
+  background-color: #777;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+
+/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
+@media (max-width: 600px) {
+  nav,edge, article {
+    width: 100%;
+    height: auto;
+  }
+}
+
+
+
+
+</style>
+
+
+
+</head>
+<body>
+
+
+<header>
+  <h2>Student evaluation generator</h2>
+</header>
+
+<section>
+  <nav>
+    <ul>
+
+      
+      
+      <h3>Please upload your gradebook. This file will be deleted as soon as the grades and comments are generated</h3>
+      <form id="uploadForm" action="http://mr-mcmanus.great-site.net/" method="POST" enctype="multipart/form-data">
+          <label for="myfile">Select a file:</label>
+          <input type="file" name="fileInput" accept=".xls,.xlsx, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel" onchange="submitForm()"><br><br>
+      </form>
+      <form id="myForm" >
+
+        <h3> Please write the name you would like to call your output file. No file extension. </h3>
+        <label for="outputname">output file name:</label><br>
+        <input type="text" id="opn" name="outputname" value="grades_course"><br>
+            
+        <! distric for langue >
+        <h3> Please enter your district, example sd36, this will be used for wording on proficiency scale</h3>
+        <label for="distric"> district ID</label><br>
+        <input type="text" id="distric" name="distric" value="sd.."><br>
+        
+        <h3> Would you like comments just on best and worse concepts and compentences or comments on all concepts and compentences?</h3>
+        <input type="radio" id="True" name="bw" value="true">
+        <label for="True">Comments just on best and worse</label><br>
+        <input type="radio" id="False" name="bw" value="false">
+        <label for="False">Comments on all </label><br>
+        
+        <h3> Would you like all zeros to be excused</h3>
+        <input type="radio" id="True" name="nozeros" value="true">
+        <label for="True">Yes</label><br>
+        <input type="radio" id="False" name="nozeros" value="false">
+        <label for="False">No </label><br>
+        
+    </form>
+      
+      
+      
+      
+      
+    <! do weighting here but later>
+    <h3> Please put the name of the assessment type on the left and the weighting of the assessment type (out of 100%) on the right </h3>
+    <form  id="data">
+        <label for="outputname">&nbsp; Assessment Type   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   Assessment Value (no % sign) </label><br>
+        
+        <input type="text" id="assessmentt1" name="assessmenttype[]" value="Tests (replace)">
+        <input type="text" id="assessmentv1" name="assessmentvalue[]" value="50 (replace)"><br>
+        
+     
+    </form>
+        <input type="button" value="Add assessment type" onclick="javascript: addQuestion();"/>
+        <br>
+        <p></p>
+            
+
+
+    <form id="test" >
+        <h3> Is your gradebook using the proficiency scale out of 4 or traditional grading</h3>
+        <input type="radio" id="proficiency scale" name="type" value="proficiency scale">
+        <label for="True">Proficiency scale</label><br>
+        <input type="radio" id="traditional" name="type" value="traditional">
+        <label for="False">Traditional grading </label><br>
+        
+        <! grade range, how it change based on traditional or proficiency, Also have language change based on distric >
+        <h3> For proficiency scale please inticate the range for each grade. 3/4 would be 75, 2/4 would be 50, 1/4 would be 25. Please enter the percent as a number between 1 and 100 no percent. <br> The values that are entered are half way between 4/4 3/4 2/4 and 1/4 </h3>
+        <p>Grade &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Lowest percent for this grade</p>
+        <label for="scale">Extending </label>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="text" id="scale1" name="profscale[]" value="87.5"><br>
+            
+        <label for="scale">Proficient </label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="text" id="scale2" name="profscale[]" value="62.5"> <br>
+   
+
+        <label for="scale"> Developing </label>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="text" id="scale3" name="profscale[]" value="37.5"><br>
+
+        <label for="scale"> Emerging </label>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="text" id="scale4" name="profscale[]" value="12.5"><br>
+            
+        <p> Anything under the lower end of emerging will be written as insufficient evidence </p>
+
+
+        <! weighting type have an option for no weighting>
+        <h3> Please pick your weighting. This weighting only affects the calculations of compencies. Description of each weighting can be found here:</h3>
+        <input type="radio" id="amount" name="compw" value="amount" >
+        <label for="amount">Amount Based</label><br>
+        <input type="radio" id="time_amount" name="compw" value="time_amount" onclick="ShowHideDiva()">
+        <label for="time_amount">Time and Amount Based </label><br>
+        <input type="radio" id="time_based" name="compw" value="time_based" onclick="ShowHideDivb()">
+        <label for="time_based">Time Based</label><br>
+        <input type="radio" id="average" name="compw" value="average" onclick="HideScale()">
+        <label for="average">No extra weighting </label><br>
+                
+
+        <! new old   only appear if time based weighting selected>
+        
+        <div id="newold" style="display: none">
+            <h3> Is the first assignment in your grade book (so must left assignment) the newest or oldest assignment?</h3>
+            <input type="radio" id="old" name="oldnew" value="old" checked>
+            <label for="old">Oldest</label><br>
+            <input type="radio" id="new" name="oldnew" value="new" >
+            <label for="new">News </label><br>
+ 
+        </div>
+
+        <div id="weightingscale" style="display: none">
+            <h3> Please enter the scale you would like between 0 and 1. 1 is maximum about of scale. (about 50% more weighting on some assignments.) 0 is almost no scaling. About 5% weighting on some assignments </h3>
+            <label for="wscale">Scale</label><br>
+            <input type="text" id="wscale" name="weightscale" value="0.5"><br>
+            
+        </div>
+        
+        
+
+        <! course name>
+        <h3> Please write the name of the course that will show up in the comments </h3>
+        <label for="outputname">output file name:</label><br>
+        <input type="text" id="namename" name="outputname11" value="grades_course"><br>
+        <br><br>
+        
+            
+        <button type="button" onclick="saveValue()">Save</button>
+
+    </form>
+
+
+      
+    </ul>
+  </nav>
+
+  <article>
+    <p> In here I will be putting information and videos explaining each part of this program.</p>
+  </article>
+</section>
+
+<footer>
+  <p>Contact information</p>
+</footer>
+
+
+
+
+</body>
+</html>
+
+

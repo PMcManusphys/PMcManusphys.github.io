@@ -1,0 +1,45 @@
+<html>
+<head>
+<script>
+
+    function saveValue() {
+        // Get the value of the input element
+        var myValue = document.getElementById("my-input2").value;
+        
+        // Do something with the value
+        var myObject = { "name": myValue };
+        
+        // Convert the object to a JSON string
+        var jsonString = JSON.stringify(myObject);
+        
+        // Save the JSON string to a file
+        saveJSON(jsonString, "my-data.json");
+    }
+
+
+function saveJSON(jsonString, fileName) {
+    var blob = new Blob([jsonString], {type: "application/json"});
+    saveAs(blob, fileName);
+}
+</script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+
+</head>
+<body>
+    <form>
+        <label for="my-input">Enter your name:</label>
+        <input type="text" id="my-input" name="my-input">
+            <button type="button" onclick="saveValue()">Save</button>
+    </form>
+    <form>
+        <label for="my-input">Enter your name:</label>
+        <input type="text" id="my-input2" name="my-input">
+            <button type="button" onclick="saveValue()">Save</button>
+    </form>
+</body>
+</html>
+
+
