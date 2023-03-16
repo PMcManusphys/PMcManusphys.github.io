@@ -135,13 +135,13 @@ function saveValue() {
     // Convert the object to a JSON string
     var jsonData = JSON.stringify(myObject);
     
-    fetch("http://mr-mcmanus.great-site.net/",
+    fetch("https://pmcmanusphys.github.io/api",
             ).then(res =>{
                        
                        console.log(res)
                    })
     
-    fetch("http://mr-mcmanus.great-site.net/", {
+    fetch("https://pmcmanusphys.github.io/api", {
           method: "POST",
           body: jsonData,
           headers: {
