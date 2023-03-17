@@ -141,7 +141,8 @@ function saveValue() {
           headers: {
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "https://pmcmanusphys.github.io" // Replace with your origin domain
-          }
+          },
+          mode: "cors"
          })
     
     .then(res => res.json())
