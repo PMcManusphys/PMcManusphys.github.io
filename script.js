@@ -134,20 +134,15 @@ function saveValue() {
     
     // Convert the object to a JSON string
     var jsonData = JSON.stringify(myObject);
-    
-    fetch("https://uvidrr7d1h.execute-api.ca-central-1.amazonaws.com/default/api",
-            ).then(res =>{
-                       
-                       console.log(res)
-                   })
-    
+   
     fetch("https://uvidrr7d1h.execute-api.ca-central-1.amazonaws.com/default/api", {
           method: "POST",
           body: jsonData,
           headers: {
-          "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "https://pmcmanusphys.github.io" // Replace with your origin domain
           }
-          })
+         })
     
     .then(res => res.json())
     .then(json => console.log(json))
