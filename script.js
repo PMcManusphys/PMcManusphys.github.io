@@ -140,7 +140,8 @@ function saveValue() {
           body: jsonData,
           headers: {
             "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "https://pmcmanusphys.github.io", // Replace with your origin domain
+            "Access-Control-Allow-Origin": "https://pmcmanusphys.github.io",
+            "Access-Control-Request-Headers: Content-Type, Authorization",// Replace with your origin domain
             "Access-Control-Allow-Credentials": true
           },
           mode: "cors"
