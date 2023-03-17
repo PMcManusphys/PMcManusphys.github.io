@@ -135,7 +135,7 @@ function saveValue() {
     // Convert the object to a JSON string
     var jsonData = JSON.stringify(myObject);
    
-    fetch("https://uvidrr7d1h.execute-api.ca-central-1.amazonaws.com/default/api", {
+    fetch("https://uvidrr7d1h.execute-api.ca-central-1.amazonaws.com/default", {
           method: "POST",
           body: jsonData,
           headers: {
