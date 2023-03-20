@@ -158,17 +158,17 @@ function saveValue() {
     
     
     
-    .then(response => response.blob())
-    .then(blob => {
-        var url = window.URL.createObjectURL(blob);
-        var a = document.createElement('a');
-        a.href = url;
-        a.download = "filename.doc"; // find a way to pass in the file name as well
-        document.body.appendChild(a); // we need to append the element to the dom -> otherwise it will not work in firefox
-        a.click();    
-        a.remove();  //afterwards we remove the element again 
-        URL.revokeObjectURL();
-    })
+    .then(response => {
+        const filename = response.headers.get('content-disposition').split('=')[1];
+        return response.blob().then(blob => {
+          const link = document.createElement('a');
+          link.href = window.URL.createObjectURL(blob);
+          link.download = filename;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        });
+      })
     .catch(err => console.error(err));
     //or
     //.then( blob => {
