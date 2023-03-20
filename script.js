@@ -148,12 +148,11 @@ function saveValue() {
     .catch(err => console.error(err));
     
     //Get request and download
-    
-    //    queryStringParameters: {
+    //fetch("https://tfv02mc7d4.execute-api.ca-central-1.amazonaws.com/comments" + new URLSearchParams({
     //    'json': outputname,
     //    'excel' : find way to save excel file name and put it here
-    //}
-    
+    //}))
+
     
     // Save the JSON string to a file
     //saveJSON(jsonString, "my-data.json");
