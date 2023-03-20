@@ -168,7 +168,7 @@ function saveValue() {
                 a.click();    
                 a.remove();  //afterwards we remove the element again 
                 URL.revokeObjectURL
-            });
+            })
     .catch(err => console.error(err));
     //or
     //.then( blob => {
