@@ -135,7 +135,7 @@ function saveValue() {
     // Convert the object to a JSON string
     var jsonData = JSON.stringify(myObject);
    
-    fetch("https://tfv02mc7d4.execute-api.ca-central-1.amazonaws.com/comments", {
+    fetch("https://t154f8ht3b.execute-api.ca-central-1.amazonaws.com/default/new", {
           method: "POST",
           body: jsonData,
           headers: {
@@ -151,7 +151,7 @@ function saveValue() {
     var inputname = document.getElementById("inputfile").value;
     
     //Get request and download. if this does not work try the method get 
-    fetch("https://tfv02mc7d4.execute-api.ca-central-1.amazonaws.com/comments" + new URLSearchParams({
+    fetch("https://t154f8ht3b.execute-api.ca-central-1.amazonaws.com/default/new" + new URLSearchParams({
         'json': outputname,
         'excel' : inputname
     }), { method: 'GET' })
