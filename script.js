@@ -146,6 +146,15 @@ function saveValue() {
     .then(res => res.json())
     .then(json => console.log(json))
     .catch(err => console.error(err));
+    
+    //Get request and download
+    
+    //    queryStringParameters: {
+    //    'json': outputname,
+    //    'excel' : find way to save excel file name and put it here
+    //}
+    
+    
     // Save the JSON string to a file
     //saveJSON(jsonString, "my-data.json");
     
