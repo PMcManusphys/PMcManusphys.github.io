@@ -147,6 +147,32 @@ function saveValue() {
     .then(json => console.log(json))
     .catch(err => console.error(err));
     
+    const form = document.querySelector('#uploadForm');
+
+
+
+      const formData = new FormData();
+      const fileInput = document.querySelector('input[name="fileInput"]');
+      const fileName = fileInput.files[0].name;
+      formData.append('file', fileInput.files[0]);
+
+      const url = 'https://t154f8ht3b.execute-api.ca-central-1.amazonaws.com/default/new';
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        },
+        body: formData
+      };
+
+      try {
+        const response = await fetch(url, options);
+        console.log(response);
+      } catch (error) {
+        console.error(error);
+      }
+
+    
     
     var inputname = document.getElementById("inputfile").value;
     
