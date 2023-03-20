@@ -147,13 +147,28 @@ function saveValue() {
     .then(json => console.log(json))
     .catch(err => console.error(err));
     
-    //Get request and download
-    //fetch("https://tfv02mc7d4.execute-api.ca-central-1.amazonaws.com/comments" + new URLSearchParams({
-    //    'json': outputname,
-    //    'excel' : find way to save excel file name and put it here
-    //}))
-    //.then(response => {
-        // Do something with the response here
+    //Get request and download. if this does not work try the method get 
+    fetch("https://tfv02mc7d4.execute-api.ca-central-1.amazonaws.com/comments" + new URLSearchParams({
+        'json': outputname,
+        'excel' : find way to save excel file name and put it here
+    }), { method: 'GET' })
+    
+    .then(response => response.blob())
+            .then(blob => {
+                var url = window.URL.createObjectURL(blob);
+                var a = document.createElement('a');
+                a.href = url;
+                a.download = "filename.doc"; // find a way to pass in the file name as well
+                document.body.appendChild(a); // we need to append the element to the dom -> otherwise it will not work in firefox
+                a.click();    
+                a.remove();  //afterwards we remove the element again 
+                URL.revokeObjectURL
+            });
+    
+    //or
+    //.then( blob => {
+    //    var file = window.URL.createObjectURL(blob);
+    //    window.location.assign(file);
     //});
     //.catch(err => console.error(err));
 
