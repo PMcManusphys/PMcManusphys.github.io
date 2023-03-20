@@ -147,11 +147,16 @@ function saveValue() {
     .then(json => console.log(json))
     .catch(err => console.error(err));
     
+    
+    var inputname = document.getElementById("inputfile").value;
+    
     //Get request and download. if this does not work try the method get 
     fetch("https://tfv02mc7d4.execute-api.ca-central-1.amazonaws.com/comments" + new URLSearchParams({
         'json': outputname,
-        'excel' : find way to save excel file name and put it here
+        'excel' : inputname
     }), { method: 'GET' })
+    
+    
     
     .then(response => response.blob())
             .then(blob => {
@@ -164,13 +169,13 @@ function saveValue() {
                 a.remove();  //afterwards we remove the element again 
                 URL.revokeObjectURL
             });
-    
+    .catch(err => console.error(err));
     //or
     //.then( blob => {
     //    var file = window.URL.createObjectURL(blob);
     //    window.location.assign(file);
     //});
-    //.catch(err => console.error(err));
+    //
 
     
     // Save the JSON string to a file
