@@ -152,6 +152,10 @@ function saveValue() {
     //    'json': outputname,
     //    'excel' : find way to save excel file name and put it here
     //}))
+    //.then(response => {
+        // Do something with the response here
+    //});
+    //.catch(err => console.error(err));
 
     
     // Save the JSON string to a file
