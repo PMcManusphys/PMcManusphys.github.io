@@ -165,12 +165,10 @@ function saveValue() {
         body: formData
       };
 
-      try {
-        const response = await fetch(url, options);
-        console.log(response);
-      } catch (error) {
-        console.error(error);
-      }
+    fetch(url, options);
+    .then(res => res.json())
+    .then(json => console.log(json))
+    .catch(err => console.error(err));
 
     
     
