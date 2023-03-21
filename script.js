@@ -148,26 +148,22 @@ function saveValue() {
     .catch(err => console.error(err));
     
     const form = document.querySelector('#uploadForm');
+      
 
-    
 
-    const formData = new FormData();
     const fileInput = document.querySelector('input[name="fileInput"]');
     const fileName = fileInput.files[0].name;
-    formData.append('file', fileInput.files[0], fileName);
+    const file = fileInput.files[0];
 
-
-  
-
-      const url = `https://t154f8ht3b.execute-api.ca-central-1.amazonaws.com/default/new?file=${encodeURIComponent(fileName)}`;
-      const options = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        },
-        body: formData
-      };
-
+    const url = `https://t154f8ht3b.execute-api.ca-central-1.amazonaws.com/default/new?file=${encodeURIComponent(fileName)}`;
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': file.type
+      },
+      body: new Blob([file], { type: file.type })
+    };
+    
     fetch(url, options)
     .then(res => res.json())
     .then(json => console.log(json))
