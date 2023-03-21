@@ -174,7 +174,7 @@ function saveValue() {
       const options = {
         method: 'POST',
         headers: {
-          'Content-Type': 'multipart/form-data'
+          'Content-Type': 'text/csv'
         },
         body: formDataA
       };
