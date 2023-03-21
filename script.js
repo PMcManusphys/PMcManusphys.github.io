@@ -174,7 +174,7 @@ function saveValue() {
     
     var inputname = document.getElementById("inputfile").value;
     
-    const url = `https://t154f8ht3b.execute-api.ca-central-1.amazonaws.com/default/new?file=${encodeURIComponent({
+    const urla = `https://t154f8ht3b.execute-api.ca-central-1.amazonaws.com/default/new?file=${encodeURIComponent({
         'json': outputname,
         'excel' : inputname
     })}`;
