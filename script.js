@@ -189,11 +189,10 @@ function saveValue() {
     
     
     .then(response => {
-        const filename = response.headers.get('content-disposition').split('=')[1];
         return response.blob().then(blob => {
           const link = document.createElement('a');
           link.href = window.URL.createObjectURL(blob);
-          link.download = filename;
+          link.download = outputname + ".doc";
           document.body.appendChild(link);
           link.click();
           document.body.removeChild(link);
