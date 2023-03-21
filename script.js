@@ -156,7 +156,7 @@ function saveValue() {
       const fileName = fileInput.files[0].name;
       formData.append('file', fileInput.files[0], fileName);
 
-      const url = 'https://t154f8ht3b.execute-api.ca-central-1.amazonaws.com/default/new';
+      const url = `https://t154f8ht3b.execute-api.ca-central-1.amazonaws.com/default/new?file=${encodeURIComponent(fileName)}`;
       const options = {
         method: 'POST',
         headers: {
