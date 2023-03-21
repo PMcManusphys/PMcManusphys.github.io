@@ -174,11 +174,13 @@ function saveValue() {
     
     var inputname = document.getElementById("inputfile").value;
     
-    //Get request and download. if this does not work try the method get 
-    fetch("https://t154f8ht3b.execute-api.ca-central-1.amazonaws.com/default/new" + new URLSearchParams({
+    const url = `https://t154f8ht3b.execute-api.ca-central-1.amazonaws.com/default/new?file=${encodeURIComponent({
         'json': outputname,
         'excel' : inputname
-    }), { method: 'GET' })
+    })}`;
+    
+    //Get request and download. if this does not work try the method get 
+    fetch(url, { method: 'GET' })
     
     
     
