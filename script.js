@@ -160,7 +160,8 @@ function saveValue() {
       const options = {
         method: 'POST',
         headers: {
-          'Content-Type': 'multipart/form-data'
+          'Content-Type': 'multipart/form-data',
+          'Content-Disposition': fileName
         },
         body: formData
       };
