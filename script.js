@@ -150,33 +150,22 @@ function saveValue() {
     const form = document.querySelector('#uploadForm');
 
     
-    const XLSX = require('xlsx');
 
     const formData = new FormData();
     const fileInput = document.querySelector('input[name="fileInput"]');
     const fileName = fileInput.files[0].name;
     formData.append('file', fileInput.files[0], fileName);
 
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const workbook = XLSX.read(event.target.result, {type: 'binary'});
-      const sheetName = workbook.SheetNames[0];
-      const sheet = workbook.Sheets[sheetName];
-      const csv = XLSX.utils.sheet_to_csv(sheet);
-        
-      const blob = new Blob([csv], { type: 'text/csv' });
-      const formDataA = new FormData();
-      // Add the Blob to the FormData object
-      formDataA.append('csvFile', blob, fileName.replace('.xlsx', '.csv'));
+
   
 
       const url = `https://t154f8ht3b.execute-api.ca-central-1.amazonaws.com/default/new?file=${encodeURIComponent(fileName)}`;
       const options = {
         method: 'POST',
         headers: {
-          'Content-Type': 'text/csv'
+          'Content-Type': 'multipart/form-data'
         },
-        body: formDataA
+        body: formData
       };
 
     fetch(url, options)
