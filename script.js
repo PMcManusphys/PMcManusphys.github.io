@@ -180,7 +180,7 @@ function saveValue() {
     })}`;
     
     //Get request and download. if this does not work try the method get 
-    fetch(url, { method: 'GET',  
+    fetch(urla, { method: 'GET',  
         headers: {
         'Content-Type': 'application/vnd.ms-word'
     } 
