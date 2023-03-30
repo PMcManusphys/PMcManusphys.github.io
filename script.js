@@ -172,8 +172,10 @@ function saveValue() {
     
     
     var inputname = document.getElementById("inputfile").value;
+    const resultE = inputname.substring(12);
+    const filenamE = outputname + '.json,' + resultE;
     
-    const urla = `https://t154f8ht3b.execute-api.ca-central-1.amazonaws.com/default/new?file=${encodeURIComponent(outputname + ',' + inputname)}`;
+    const urla = `https://t154f8ht3b.execute-api.ca-central-1.amazonaws.com/default/new?file=${encodeURIComponent(filenamE)}`;
     
     //Get request and download. if this does not work try the method get 
     fetch(urla, { method: 'GET',  
