@@ -1,23 +1,22 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import GeneratorPage from '../views/GeneratorPage.vue'
-import AboutView from '../views/AboutView.vue'
-
+import { createRouter, createWebHistory } from 'vue-router';
+import HomeView from '../views/HomeView.vue';
+import Generator from '../views/Generator.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'generator',
-      component: GeneratorPage,
+      name: 'home',
+      component: HomeView
     },
     {
-      path: '/about',
-      name: 'about',
+      path: '/generator',
+      name: 'Generator',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: AboutView,
+      component: () => import('../views/Generator.vue')
     }
   ]
 })
