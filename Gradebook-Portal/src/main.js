@@ -4,8 +4,12 @@ import router from './router'
 
 import './assets/main.css'
 
+import 'bootstrap'
+
+import '@coreui/coreui/dist/css/coreui.min.css'
 import '@coreui/coreui/dist/css/coreui.min.css'
 import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 const app = createApp(App)
