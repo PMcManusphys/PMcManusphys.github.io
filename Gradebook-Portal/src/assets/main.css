@@ -34,3 +34,35 @@ a,
   }
 }
 */
+
+.card-header {
+  background-color: var(--primary-color-dark) !important;
+}
+
+.card-header > h3 {
+  color: white;
+  font-weight: 400;
+}
+
+body {
+  background-color: var(--background-soft) !important;
+  overflow: hidden;
+}
+
+.menu-toggle {
+  display: none !important;
+}
+
+.offcanvas-backdrop, .pointer {
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 815px) {
+  .default-nav-list {
+    display: none !important;
+  }
+
+  .menu-toggle {
+    display: block !important;
+  }
+}

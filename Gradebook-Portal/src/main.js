@@ -12,7 +12,15 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+import { CIcon } from '@coreui/icons-vue';
+import { cilHamburgerMenu, cilChevronRight } from '@coreui/icons'
+
+const icons = { cilHamburgerMenu, cilChevronRight }
+
 const app = createApp(App)
+
+app.provide('icons', icons)
+app.component('CIcon', CIcon)
 
 app.use(router)
 

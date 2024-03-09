@@ -8,13 +8,19 @@ import MenuBar from './components/MenuBar.vue'
     <MenuBar />
   </header>
 
-  <div class="">
-    <RouterView />
+  <div class="main">
+    <div class="mt-4">
+      <RouterView />
+    </div>
   </div>
 </template>
 
-<style>
-
+<style scoped>
+.main {
+  margin-top: 60px;
+  overflow-y: scroll;
+  height: calc(100vh - 60px);
+}
 /*header {
   line-height: 1.5;
   max-height: 100vh;
@@ -76,30 +82,28 @@ nav a:first-of-type {
     margin-top: 1rem;
   }*/
 }
-
-
 </style>
 
 <script>
-  export default {
-    name: "App",
-    data () {
-      return {
-        windowWidth: window.innerWidth
-      }
-    },
-    mounted() {
-      this.$nextTick(() => {
-        window.addEventListener('resize', this.onResize);
-      })
-    },
-    beforeUnmount() {
-      window.removeEventListener('resize', this.onResize);
-    },
-    methods: {
-      onResize() {
-        this.windowWidth = window.innerWidth;
-      }
+export default {
+  name: 'App',
+  data() {
+    return {
+      windowWidth: window.innerWidth,
     }
-  }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      window.addEventListener('resize', this.onResize)
+    })
+  },
+  beforeUnmount() {
+    window.removeEventListener('resize', this.onResize)
+  },
+  methods: {
+    onResize() {
+      this.windowWidth = window.innerWidth
+    },
+  },
+}
 </script>
