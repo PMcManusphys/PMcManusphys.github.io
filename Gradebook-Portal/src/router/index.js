@@ -1,6 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import GeneratorPage from '../views/GeneratorPage.vue'
+import GeneratorView from '../views/GeneratorView.vue'
+import GradeBookView from '../views/GradeBookView.vue'
+import HelpView from '../views/HelpView.vue'
 import AboutView from '../views/AboutView.vue'
+import ContactView from '../views/ContactView.vue'
 
 
 const router = createRouter({
@@ -8,16 +11,28 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'generator',
-      component: GeneratorPage,
+      name: 'Generator',
+      component: GeneratorView,
+    },
+    {
+      path: '/gradeBook',
+      name: 'Grade Book',
+      component: GradeBookView,
+    },
+    {
+      path: '/help',
+      name: 'Help',
+      component: HelpView,
     },
     {
       path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
+      name: 'About',
       component: AboutView,
+    },
+    {
+      path: '/contact',
+      name: 'Contact Us',
+      component: ContactView,
     }
   ]
 })

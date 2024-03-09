@@ -11,16 +11,16 @@ import { RouterLink } from 'vue-router'
           <RouterLink class="nav-link active" to="/">Generator</RouterLink>
         </li>
         <li class="nav-item">
-          <RouterLink class="nav-link" to="/about">Grade Book</RouterLink>
+          <RouterLink class="nav-link" to="/gradeBook">Grade Book</RouterLink>
         </li>
         <li class="nav-item">
-          <RouterLink class="nav-link" to="/about">Help</RouterLink>
+          <RouterLink class="nav-link" to="/help">Help</RouterLink>
         </li>
         <li class="nav-item">
           <RouterLink class="nav-link" to="/about">About</RouterLink>
         </li>
         <li class="nav-item">
-          <RouterLink class="nav-link" to="/about">Contact</RouterLink>
+          <RouterLink class="nav-link" to="/contact">Contact Us</RouterLink>
         </li>
       </ul>
     </div>
