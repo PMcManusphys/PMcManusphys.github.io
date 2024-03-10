@@ -55,7 +55,6 @@ export default {
   /* width: 20%; */
   width: 180px;
   height: 224.58px;
-  background-color: red;
 }
 
 @media only screen and (max-width: 500px) {

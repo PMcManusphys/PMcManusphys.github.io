@@ -5,7 +5,7 @@ import { RouterLink } from 'vue-router'
 <template>
   <nav class="navbar navbar-expand position-fixed top-0 start-0 end-0 z-3">
     <div class="container-fluid">
-      <RouterLink class="navbar-brand" to="/">Curricular Comment Generator</RouterLink>
+      <RouterLink class="navbar-brand text-white" to="/">Curricular Comment Generator</RouterLink>
       <ul class="navbar-nav mb-lg-0 default-nav-list">
         <li class="nav-item" :class="[this.$route.name == 'Generator' ? 'active' : 'pointer']">
           <RouterLink class="nav-link" to="/">Generator</RouterLink>
@@ -157,7 +157,9 @@ export default {
 .active > .nav-link {
   color: var(--secondary-color) !important;
   font-weight: 500;
-  border-bottom: 4px solid var(--secondary-color);
+  border-bottom: 3px solid var(--secondary-color);
+  padding-bottom: 4px;
+  margin-bottom: 3px;
   cursor: default;
 }
 
@@ -167,7 +169,7 @@ export default {
 
 .nav-item {
   padding-top: 10px;
-  padding-bottom: 4px;
+  padding-bottom: 5px;
   color: white;
   margin-left: 8px;
   margin-right: 8px;
@@ -179,7 +181,7 @@ export default {
 }
 
 .navbar-brand {
-  color: var(--secondary-color) !important;
+  /* color: var(--secondary-color) !important; */
   font-weight: 500;
 }
 
