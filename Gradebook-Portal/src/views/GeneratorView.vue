@@ -9,7 +9,7 @@
           <CCardBody>
             <div>
               <div class="logo-img-div float-start me-3">
-                <CCardImage orientation="top" src="src/assets/Logo1.png" class="float-start" />
+                <CCardImage orientation="top" src="src/assets/images/Logo1.png" class="float-start" />
               </div>
               <span>
                 The goal of this project is to better identify students strengths and weakness. When you generate
@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { CRow, CCol, CCard, CCardHeader, CCardBody, CCardImage, CCardGroup } from '@coreui/vue'
+import { CRow, CCol, CCard, CCardHeader, CCardBody, CCardImage, CCardGroup } from '@coreui/vue';
 
 export default {
   name: 'generator-view',
@@ -45,9 +45,9 @@ export default {
     CCardGroup,
   },
   data() {
-    return {}
+    return {};
   },
-}
+};
 </script>
 
 <style scoped>
