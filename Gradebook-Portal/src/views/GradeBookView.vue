@@ -85,7 +85,7 @@
                     <template v-for="col in SAMPLE_COL_DATA">
                       <td class="col-main">
                         <CButton
-                          class="col-btn-md w-75 mx-auto d-block"
+                          class="col-btn-md mx-auto d-block"
                           :class="{ 'sample-btn-selected': this.selectedImageURL == col.image_url }"
                           color="light"
                           @mouseover="updateHoveredImageURL(col.image_url)"
@@ -314,6 +314,7 @@ export default {
 
 .col-btn-md {
   min-width: 100px;
+  width: 95%;
 }
 
 .sample-btn-selected,
