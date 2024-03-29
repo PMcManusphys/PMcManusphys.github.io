@@ -1,6 +1,6 @@
 <script setup>
-import { RouterView } from 'vue-router'
-import MenuBar from './components/MenuBar.vue'
+import { RouterView } from 'vue-router';
+import MenuBar from './components/MenuBar.vue';
 </script>
 
 <template>
@@ -9,7 +9,7 @@ import MenuBar from './components/MenuBar.vue'
   </header>
 
   <div class="main">
-    <div class="mt-4">
+    <div class="spacer">
       <RouterView />
     </div>
   </div>
@@ -20,6 +20,10 @@ import MenuBar from './components/MenuBar.vue'
   margin-top: 60px;
   overflow-y: scroll;
   height: calc(100vh - 60px);
+}
+
+.spacer {
+  margin-top: 45px;
 }
 /*header {
   line-height: 1.5;
@@ -90,20 +94,20 @@ export default {
   data() {
     return {
       windowWidth: window.innerWidth,
-    }
+    };
   },
   mounted() {
     this.$nextTick(() => {
-      window.addEventListener('resize', this.onResize)
-    })
+      window.addEventListener('resize', this.onResize);
+    });
   },
   beforeUnmount() {
-    window.removeEventListener('resize', this.onResize)
+    window.removeEventListener('resize', this.onResize);
   },
   methods: {
     onResize() {
-      this.windowWidth = window.innerWidth
+      this.windowWidth = window.innerWidth;
     },
   },
-}
+};
 </script>

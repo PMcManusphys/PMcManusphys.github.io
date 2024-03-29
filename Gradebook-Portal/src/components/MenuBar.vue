@@ -1,5 +1,5 @@
 <script setup>
-import { RouterLink } from 'vue-router'
+import { RouterLink } from 'vue-router';
 </script>
 
 <template>
@@ -29,7 +29,7 @@ import { RouterLink } from 'vue-router'
         class="menu-toggle"
         @click="
           () => {
-            visible = !visible
+            visible = !visible;
           }
         "
       >
@@ -43,7 +43,7 @@ import { RouterLink } from 'vue-router'
     :visible="visible"
     @hide="
       () => {
-        visible = !visible
+        visible = !visible;
       }
     "
     class="mobile-nav"
@@ -54,7 +54,7 @@ import { RouterLink } from 'vue-router'
         class="text-reset"
         @click="
           () => {
-            visible = false
+            visible = false;
           }
         "
       />
@@ -109,7 +109,7 @@ import {
   COffcanvasBody,
   CListGroup,
   CListGroupItem,
-} from '@coreui/vue'
+} from '@coreui/vue';
 
 export default {
   name: 'menu-bar',
@@ -133,19 +133,19 @@ export default {
   data() {
     return {
       visible: false,
-    }
+    };
   },
   methods: {
     redirect(link) {
-      console.log(this.$route)
+      console.log(this.$route);
 
       if (this.$route.path != link) {
-        this.visible = false
-        this.$router.push(link)
+        this.visible = false;
+        this.$router.push(link);
       }
     },
   },
-}
+};
 </script>
 
 <style scoped>
@@ -168,8 +168,8 @@ export default {
 }
 
 .nav-item {
-  padding-top: 10px;
-  padding-bottom: 5px;
+  padding-top: 8px;
+  padding-bottom: 7px;
   color: white;
   margin-left: 8px;
   margin-right: 8px;
@@ -181,7 +181,7 @@ export default {
 }
 
 .navbar-brand {
-  /* color: var(--secondary-color) !important; */
+  color: var(--secondary-color) !important;
   font-weight: 500;
 }
 
