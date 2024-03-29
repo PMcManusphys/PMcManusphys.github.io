@@ -123,7 +123,8 @@
             <CRow>
               <CCol class="sm-9 md-10 offset-sm-3 offset-md-2 px-3">
                 <div class="callout sample-callout callout-primary">
-                  <h6 class="callout-header">{{ descriptionHeader }}</h6>
+                  <h6 class="callout-header pb-1">{{ descriptionHeader }}</h6>
+                  <hr class="bg-primary my-2" />
                   <span>{{ descriptionText }}</span>
                 </div>
               </CCol>
@@ -266,7 +267,9 @@ export default {
 .row-btn-sm:hover,
 .col-btn-md:hover,
 .col-btn-sm:hover {
-  background-color: var(--primary-color-dark);
+  /* background-color: var(--primary-color-dark); */
+  background-color: var(--secondary-color);
+  color: white;
 }
 
 .row-btn-md {

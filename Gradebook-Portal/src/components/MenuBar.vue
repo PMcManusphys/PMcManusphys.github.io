@@ -179,6 +179,9 @@ export default {
   margin-top: 2px;
   color: var(--secondary-color) !important;
 }
+.menu-toggle:hover > .hamburger-icon {
+  color: white !important;
+}
 
 .navbar-brand {
   color: var(--secondary-color) !important;
@@ -191,7 +194,9 @@ export default {
   padding-bottom: 1px;
 }
 .menu-toggle:hover {
-  background-color: var(--primary-color-dark);
+  /* background-color: var(--primary-color-dark); */
+  background-color: var(--secondary-color);
+  color: white;
 }
 
 .offcanvas-header {
