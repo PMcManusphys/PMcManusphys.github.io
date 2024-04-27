@@ -23,9 +23,13 @@
   --primary-color: #7fcbe6;
   --primary-color-dark: #41b2da;
   --primary-color-light: #e2f3f9;
-  --secondary-color: #be6125;
-  --secondary-color-light: ;
+  --secondary-color-old: #be6125;
+  --secondary-color: #d77231;
+  --secondary-color-dark: #a55420;
   --background-soft: #f2f2f2;
+
+  --cui-form-check-input-checked-bg-color: var(--secondary-color);
+  --cui-form-check-input-checked-border-color: var(--primary-color-dark);
 }
 
 /* semantic color variables for this project */
@@ -81,5 +85,5 @@ body {
 }
 
 .callout-primary {
-  --cui-callout-border-left-color: #41b2da !important;
+  --cui-callout-border-left-color: #be6125 !important;
 }

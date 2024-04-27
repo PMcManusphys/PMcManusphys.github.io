@@ -37,9 +37,12 @@ a,
 
 .card-header {
   background-color: var(--primary-color-dark) !important;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
 }
 
-.card-header > h3 {
+.card-header > h3,
+.card-header > h4 {
   color: white;
   font-weight: 400;
 }
@@ -55,6 +58,62 @@ body {
 
 .offcanvas-backdrop, .pointer {
   cursor: pointer;
+}
+
+.error-toast {
+  margin-top: 15px;
+  margin-right: 15px;
+  background-color: rgba(225, 24, 32, 0.9) !important;
+  color: white !important;
+}
+
+.error-toast-close {
+  color: white !important;
+}
+
+.btn-primary-bg {
+  background-color: var(--secondary-color) !important;
+  border: 1px solid var(--primary-color) !important;
+}
+
+.btn-primary-bg:hover {
+  background-color: var(--secondary-color-dark) !important;
+  border: 1px solid var(--primary-color) !important;
+}
+
+.form-label-text,
+.form-label-text > .form-check-label {
+  color: var(--cui-secondary-color) !important;
+}
+
+.font-14 {
+  font-size: 14px !important;
+}
+
+.font-15 {
+  font-size: 15px !important;
+}
+
+.tool-tip {
+  color: var(--secondary-color) !important;
+  cursor: help;
+}
+
+.help-canvas-header {
+  background-color: var(--primary-color) !important;
+  color: var(--secondary-color) !important;
+}
+
+.help-canvas-body {
+  background-color: var(--primary-color-light) !important;
+}
+
+.help-canvas {
+  width: 500px !important;
+}
+
+.text-secondary-color {
+  color: var(--secondary-color) !important;
 }
 
 @media only screen and (max-width: 815px) {

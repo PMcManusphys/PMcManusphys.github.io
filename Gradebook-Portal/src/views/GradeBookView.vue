@@ -4,12 +4,12 @@
       <CCardGroup>
         <CCard class="h-100">
           <CCardHeader>
-            <h3 class="mb-0">Grade Book Sample</h3>
+            <h3 class="mb-0">Grade Book</h3>
           </CCardHeader>
           <CCardBody>
             <CRow class="mb-3">
               <CCol>
-                Below is an image of a sample grade book file. Click on any of the row or column labels to see a
+                Below is an image of a sample grade book file, click on any of the row or column labels to see a
                 description of how each portion of the file is layed out.
               </CCol>
             </CRow>
@@ -121,7 +121,7 @@
             </CRow>
 
             <CRow>
-              <CCol class="sm-9 md-10 offset-sm-3 offset-md-2 px-3">
+              <CCol class="col-sm-12 col-md-10 offset-md-2 px-3">
                 <div class="callout sample-callout callout-primary">
                   <h6 class="callout-header pb-1">{{ descriptionHeader }}</h6>
                   <hr class="bg-primary my-2" />
@@ -132,12 +132,112 @@
           </CCardBody>
         </CCard>
       </CCardGroup>
+
+      <CRow class="mb-5">
+        <CCol class="">
+          <CCard class="mt-4">
+            <CCardHeader>
+              <h3 class="mb-0">Resources & Downloads</h3>
+            </CCardHeader>
+            <CCardBody>
+              <CRow>
+                <CCol class="col-9 col-lg-10">
+                  <h5>Grade Book Template</h5>
+                  <p class="mb-0">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ultricies non dui sit amet lacinia.
+                    Proin bibendum posuere risus at varius. Cras imperdiet rutrum est, at tristique enim vehicula sed.
+                  </p>
+                </CCol>
+                <CCol class="col-3 col-lg-2 align-self-center">
+                  <CButton class="download-button position-absolute top-50 start-50 translate-middle" color="light">
+                    <CIcon icon="cilDataTransferDown" class="me-2" />
+                    Download
+                  </CButton>
+                </CCol>
+              </CRow>
+
+              <hr class="bg-primary my-4" />
+
+              <CRow>
+                <CCol class="col-9 col-lg-10">
+                  <h5>Sample Grade Book</h5>
+                  <p class="mb-0">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel mi a ex dictum gravida.
+                    Curabitur scelerisque mauris ante, et pulvinar turpis aliquam a.
+                  </p>
+                </CCol>
+                <CCol class="col-3 col-lg-2 align-self-center">
+                  <CButton class="download-button position-absolute top-50 start-50 translate-middle" color="light">
+                    <CIcon icon="cilDataTransferDown" class="me-2" />
+                    Download
+                  </CButton>
+                </CCol>
+              </CRow>
+
+              <hr class="bg-primary my-4" />
+
+              <CRow>
+                <CCol class="col-9 col-lg-10">
+                  <h5>Sample Report</h5>
+                  <p class="mb-0">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer suscipit, sem eget facilisis
+                    condimentum, lacus diam iaculis purus, ac dignissim lectus risus in libero. Nam volutpat luctus
+                    metus, et sodales tortor aliquam sed.
+                  </p>
+                </CCol>
+                <CCol class="col-3 col-lg-2 align-self-center">
+                  <CButton class="download-button position-absolute top-50 start-50 translate-middle" color="light">
+                    <CIcon icon="cilDataTransferDown" class="me-2" />
+                    Download
+                  </CButton>
+                </CCol>
+              </CRow>
+              <!-- <CListGroup>
+                <CListGroupItem>
+                  <CRow>
+                    <CCol class="col-9">
+                      <h5>Sample Grade Book</h5>
+                      <p class="mb-0">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel mi a ex dictum gravida.
+                        Curabitur scelerisque mauris ante, et pulvinar turpis aliquam a.
+                      </p>
+                    </CCol>
+                    <CCol class="col-3 align-self-center">
+                      <CButton class="download-button" color="light">
+                        <CIcon icon="cilDataTransferDown" class="me-2" />
+                        Download
+                      </CButton>
+                    </CCol>
+                  </CRow>
+                </CListGroupItem>
+                <CListGroupItem>Dapibus ac facilisis in</CListGroupItem>
+                <CListGroupItem>Morbi leo risus</CListGroupItem>
+                <CListGroupItem>Porta ac consectetur ac</CListGroupItem>
+                <CListGroupItem>Vestibulum at eros</CListGroupItem>
+              </CListGroup> -->
+            </CCardBody>
+          </CCard>
+        </CCol>
+      </CRow>
     </div>
   </main>
 </template>
 
 <script>
-import { CRow, CCol, CCard, CCardHeader, CCardBody, CCardImage, CCardGroup, CButtonGroup, CButton } from '@coreui/vue';
+import {
+  CRow,
+  CCol,
+  CCard,
+  CCardHeader,
+  CCardBody,
+  CCardImage,
+  CCardGroup,
+  CButtonGroup,
+  CButton,
+  CListGroup,
+  CListGroupItem,
+  CBadge,
+} from '@coreui/vue';
 
 const SAMPLE_ROW_DATA = [
   {
@@ -219,6 +319,9 @@ export default {
     CCardGroup,
     CButtonGroup,
     CButton,
+    CListGroup,
+    CListGroupItem,
+    CBadge,
   },
   data() {
     return {
@@ -335,5 +438,20 @@ export default {
 
 .callout-header {
   color: var(--secondary-color);
+}
+
+.downloads-callout {
+  background-color: white;
+}
+
+.download-button {
+  border: 1px solid var(--secondary-color) !important;
+  background-color: var(--primary-color-light);
+  color: var(--secondary-color);
+  min-width: 127px;
+}
+
+.download-button:hover {
+  background-color: var(--primary-color);
 }
 </style>

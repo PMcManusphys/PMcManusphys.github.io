@@ -13,9 +13,9 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import { CIcon } from '@coreui/icons-vue';
-import { cilHamburgerMenu, cilChevronRight } from '@coreui/icons'
+import { cilHamburgerMenu, cilChevronRight, cilDataTransferDown, cilPlus, cilMinus, cilThumbDown, cilMagnifyingGlass } from '@coreui/icons'
 
-const icons = { cilHamburgerMenu, cilChevronRight }
+const icons = { cilHamburgerMenu, cilChevronRight, cilDataTransferDown, cilPlus, cilMinus, cilThumbDown, cilMagnifyingGlass }
 
 const app = createApp(App)
 
