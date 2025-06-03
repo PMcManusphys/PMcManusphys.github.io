@@ -1,242 +1,705 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>CSS Template</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <title>Curriculum Form → Download Word</title>
+  <script src="https://unpkg.com/docx@8.2.0/build/index.umd.js"></script>
+  <!-- docx@8.2.0 (UMD) -->
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 2rem;
+      line-height: 1.4;
+    }
 
-<script type="text/javascript" src="script.js"></script>
+    /* Rounded‐corner inputs, selects, textareas, and date fields */
+    input[type="text"],
+    input[type="date"],
+    select,
+    textarea {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 0.5rem;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
 
+    /* Restrict most fields to a reasonable width (not full‐page) */
+    .small-input {
+      width: 280px;
+    }
+    .medium-input {
+      width: 350px;
+    }
+    .large-input {
+      width: 100%;
+    }
 
+    /* Flex container for side‐by‐side fields */
+    .flex-row {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+    .flex-row label {
+      margin-bottom: 0.25rem;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+    .flex-row .field-container {
+      display: flex;
+      flex-direction: column;
+    }
 
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-bottom: 1.5rem;
+    }
+    td, th {
+      border: 1px solid #666;
+      padding: 0.5rem;
+      vertical-align: top;
+    }
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    label.section-label {
+      font-weight: bold;
+      margin-top: 1rem;
+      display: block;
+    }
 
-<style>
-* {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-/* Style the header */
-header {
-  background-color: #666;
-  padding: 30px;
-  text-align: center;
-  font-size: 35px;
-  color: white;
-}
-
-/* Create two columns/boxes that floats next to each other */
-nav {
-  float: left;
-  width: 50%;
-
-  background: #ccc;
-  padding: 20px;
-}
-
-/* Style the list inside the menu */
-nav ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-
-article {
-  float: left;
-  padding: 20px;
-  width: 50%;
-  background-color: #f1f1f1;
-}
-
-/* Clear floats after the columns */
-section::after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Style the footer */
-footer {
-  background-color: #777;
-  padding: 10px;
-  text-align: center;
-  color: white;
-}
-
-/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
-@media (max-width: 600px) {
-  nav,edge, article {
-    width: 100%;
-    height: auto;
-  }
-}
-
-
-
-
-</style>
-
-
-
+    .download-btn {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 0.75rem 1.25rem;
+      text-align: center;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+  </style>
 </head>
 <body>
 
+  <h1>Curriculum Planning Based on Student Interest</h1>
 
-<header>
-  <h2>Student evaluation generator</h2>
-</header>
+  <form id="curriculumForm">
+    <!-- Project Name on its own line -->
+    <div class="flex-row">
+      <div class="field-container">
+        <label for="projectName">Project Name:</label>
+        <input type="text" id="projectName" name="projectName" class="medium-input" />
+      </div>
+    </div>
 
-<section>
-  <nav>
-    <ul>
+    <!-- Under Project Name: Student Interest and Project Date Range side by side -->
+    <div class="flex-row">
+      <div class="field-container">
+        <label for="studentInterest">Student Interest:</label>
+        <input type="text" id="studentInterest" name="studentInterest" class="medium-input" />
+      </div>
 
-      
-      
-      <h3>Please upload your gradebook. This file will be deleted as soon as the grades and comments are generated</h3>
-      <form id="uploadForm">
-          <label for="myfile">Select a file:</label>
-          <input type="file" name="fileInput" id= "inputfile" accept=".xls,.xlsx, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"><br><br>
-      </form>
-      <form id="myForm" >
-
-        <h3> Please write the name you would like to call your output file. No file extension. </h3>
-        <label for="outputname">output file name:</label><br>
-        <input type="text" id="opn" name="outputname" value="grades_course"><br>
-            
-        <! distric for langue >
-        <h3> Please enter your district, example sd36, this will be used for wording on proficiency scale</h3>
-        <label for="distric"> district ID</label><br>
-        <input type="text" id="distric" name="distric" value="sd.."><br>
-        
-        <h3> Would you like comments just on best and worse concepts and compentences or comments on all concepts and compentences?</h3>
-        <input type="radio" id="True" name="bw" value="true">
-        <label for="True">Comments just on best and worse</label><br>
-        <input type="radio" id="False" name="bw" value="false">
-        <label for="False">Comments on all </label><br>
-        
-        <h3> Would you like all zeros to be excused</h3>
-        <input type="radio" id="True" name="nozeros" value="true">
-        <label for="True">Yes</label><br>
-        <input type="radio" id="False" name="nozeros" value="false">
-        <label for="False">No </label><br>
-        
-    </form>
-      
-      
-      
-      
-      
-    <! do weighting here but later>
-    <h3> Please put the name of the assessment type on the left and the weighting of the assessment type (out of 100%) on the right </h3>
-    <form  id="data">
-        <label for="outputname">&nbsp; Assessment Type   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   Assessment Value (no % sign) </label><br>
-        
-        <input type="text" id="assessmentt1" name="assessmenttype[]" value="Tests (replace)">
-        <input type="text" id="assessmentv1" name="assessmentvalue[]" value="50 (replace)"><br>
-        
-     
-    </form>
-        <input type="button" value="Add assessment type" onclick="javascript: addQuestion();"/>
-        <br>
-        <p></p>
-            
-
-
-    <form id="test" >
-        <h3> Is your gradebook using the proficiency scale out of 4 or traditional grading</h3>
-        <input type="radio" id="proficiency scale" name="type" value="proficiency scale">
-        <label for="True">Proficiency scale</label><br>
-        <input type="radio" id="traditional" name="type" value="traditional">
-        <label for="False">Traditional grading </label><br>
-        
-        <! grade range, how it change based on traditional or proficiency, Also have language change based on distric >
-        <h3> For proficiency scale please inticate the range for each grade. 3/4 would be 75, 2/4 would be 50, 1/4 would be 25. Please enter the percent as a number between 1 and 100 no percent. <br> The values that are entered are half way between 4/4 3/4 2/4 and 1/4 </h3>
-        <p>Grade &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Lowest percent for this grade</p>
-        <label for="scale">Extending </label>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="text" id="scale1" name="profscale[]" value="87.5"><br>
-            
-        <label for="scale">Proficient </label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="text" id="scale2" name="profscale[]" value="62.5"> <br>
-   
-
-        <label for="scale"> Developing </label>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="text" id="scale3" name="profscale[]" value="37.5"><br>
-
-        <label for="scale"> Emerging </label>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="text" id="scale4" name="profscale[]" value="12.5"><br>
-            
-        <p> Anything under the lower end of emerging will be written as insufficient evidence </p>
-
-
-        <! weighting type have an option for no weighting>
-        <h3> Please pick your weighting. This weighting only affects the calculations of compencies. Description of each weighting can be found here:</h3>
-        <input type="radio" id="amount" name="compw" value="amount" >
-        <label for="amount">Amount Based</label><br>
-        <input type="radio" id="time_amount" name="compw" value="time_amount" onclick="ShowHideDiva()">
-        <label for="time_amount">Time and Amount Based </label><br>
-        <input type="radio" id="time_based" name="compw" value="time_based" onclick="ShowHideDivb()">
-        <label for="time_based">Time Based</label><br>
-        <input type="radio" id="average" name="compw" value="average" onclick="HideScale()">
-        <label for="average">No extra weighting </label><br>
-                
-
-        <! new old   only appear if time based weighting selected>
-        
-        <div id="newold" style="display: none">
-            <h3> Is the first assignment in your grade book (so must left assignment) the newest or oldest assignment?</h3>
-            <input type="radio" id="old" name="oldnew" value="old" checked>
-            <label for="old">Oldest</label><br>
-            <input type="radio" id="new" name="oldnew" value="new" >
-            <label for="new">News </label><br>
- 
+      <div class="field-container">
+        <label>Project Date (Range):</label>
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <input type="date" id="projectDateStart" name="projectDateStart" class="small-input" />
+          <span>to</span>
+          <input type="date" id="projectDateEnd" name="projectDateEnd" class="small-input" />
         </div>
+      </div>
+    </div>
 
-        <div id="weightingscale" style="display: none">
-            <h3> Please enter the scale you would like between 0 and 1. 1 is maximum about of scale. (about 50% more weighting on some assignments.) 0 is almost no scaling. About 5% weighting on some assignments </h3>
-            <label for="wscale">Scale</label><br>
-            <input type="text" id="wscale" name="weightscale" value="0.5"><br>
-            
+    <!-- Subject‐Big Idea‐Competencies table -->
+    <div style="margin-bottom: 2rem;">
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 15%;">Subject area</th>
+            <th style="width: 30%;">Big Idea(s)</th>
+            <th style="width: 55%;">Curricular Competencies</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- ADST row -->
+          <tr>
+            <td>ADST</td>
+            <td><textarea id="adstBigIdea" name="adstBigIdea" class="large-input"></textarea></td>
+            <td><textarea id="adstCC" name="adstCC" class="large-input"></textarea></td>
+          </tr>
+          <!-- Arts Education row -->
+          <tr>
+            <td>Arts Education</td>
+            <td><textarea id="artsBigIdea" name="artsBigIdea" class="large-input"></textarea></td>
+            <td><textarea id="artsCC" name="artsCC" class="large-input"></textarea></td>
+          </tr>
+          <!-- English Language Arts row -->
+          <tr>
+            <td>English Language Arts</td>
+            <td><textarea id="elaBigIdea" name="elaBigIdea" class="large-input"></textarea></td>
+            <td><textarea id="elaCC" name="elaCC" class="large-input"></textarea></td>
+          </tr>
+          <!-- Mathematics row -->
+          <tr>
+            <td>Mathematics</td>
+            <td><textarea id="mathBigIdea" name="mathBigIdea" class="large-input"></textarea></td>
+            <td><textarea id="mathCC" name="mathCC" class="large-input"></textarea></td>
+          </tr>
+          <!-- Physical and Health Education row -->
+          <tr>
+            <td>Physical and Health Education</td>
+            <td><textarea id="pheBigIdea" name="pheBigIdea" class="large-input"></textarea></td>
+            <td><textarea id="pheCC" name="pheCC" class="large-input"></textarea></td>
+          </tr>
+          <!-- Science row -->
+          <tr>
+            <td>Science</td>
+            <td><textarea id="scienceBigIdea" name="scienceBigIdea" class="large-input"></textarea></td>
+            <td><textarea id="scienceCC" name="scienceCC" class="large-input"></textarea></td>
+          </tr>
+          <!-- Social Studies row -->
+          <tr>
+            <td>Social Studies</td>
+            <td><textarea id="socialBigIdea" name="socialBigIdea" class="large-input"></textarea></td>
+            <td><textarea id="socialCC" name="socialCC" class="large-input"></textarea></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Considerations, Materials, Vocabulary sections -->
+    <div class="section">
+      <label class="section-label" for="considerations">Considerations:</label>
+      <textarea id="considerations" name="considerations" class="large-input"></textarea>
+    </div>
+
+    <div class="section">
+      <label class="section-label" for="materials">Materials/Resources Needed:</label>
+      <textarea id="materials" name="materials" class="large-input"></textarea>
+    </div>
+
+    <div class="section">
+      <label class="section-label" for="vocabulary">Vocabulary to model:</label>
+      <textarea id="vocabulary" name="vocabulary" class="large-input"></textarea>
+    </div>
+
+    <!-- Student Communication Systems (three side‐by‐side selects, then “Other” text) -->
+    <div class="section">
+      <label class="section-label">Student Communication Systems:</label>
+      <div style="display: flex; gap: 1rem; margin-bottom: 0.5rem;">
+        <select id="comms1" name="comms1" class="small-input">
+          <option value="">Choose an item</option>
+          <option>Speech</option>
+          <option>Picture Exchange</option>
+          <option>Eye Gaze</option>
+          <option>Signing</option>
+          <option>Other</option>
+        </select>
+
+        <select id="comms2" name="comms2" class="small-input">
+          <option value="">Choose an item</option>
+          <option>Speech</option>
+          <option>Picture Exchange</option>
+          <option>Eye Gaze</option>
+          <option>Signing</option>
+          <option>Other</option>
+        </select>
+
+        <select id="comms3" name="comms3" class="small-input">
+          <option value="">Choose an item</option>
+          <option>Speech</option>
+          <option>Picture Exchange</option>
+          <option>Eye Gaze</option>
+          <option>Signing</option>
+          <option>Other</option>
+        </select>
+
+        <div class="field-container">
+          <label for="commsOther" style="font-weight: normal; margin-bottom: 0.25rem;">
+            Other:
+          </label>
+          <input type="text" id="commsOther" name="commsOther" class="medium-input" />
         </div>
-        
-        
+      </div>
+    </div>
 
-        <! course name>
-        <h3> Please write the name of the course that will show up in the comments </h3>
-        <label for="outputname">course name:</label><br>
-        <input type="text" id="namename" name="outputname11" value="grades_course"><br>
-        <br><br>
-        
-      <p> You might have to click save twice. Some times the files do not save in time so It can not make the file. <br> Once you click save again you will get the comments and not an error message </p>
-            
-        <button type="button" onclick="saveValue()">Save</button>
+    <!-- Involving peers -->
+    <div class="section">
+      <label class="section-label">Involving peers:</label>
+      <div style="display: flex; gap: 1rem; align-items: center;">
+        <input type="checkbox" id="peerClassroom" name="peerInvolve" value="Classroom" />
+        <label for="peerClassroom">Classroom</label>
 
-    </form>
+        <input type="checkbox" id="peerHallway" name="peerInvolve" value="Hallway" />
+        <label for="peerHallway">Hallway</label>
 
+        <input type="checkbox" id="peerOther" name="peerInvolve" value="Other" />
+        <label for="peerOther">Other:</label>
+        <input type="text" id="peerOtherText" name="peerOtherText" class="small-input" />
+      </div>
+    </div>
 
-      
-    </ul>
-  </nav>
+    <div class="section">
+      <label class="section-label" for="studentsToAsk">Students to ask:</label>
+      <input type="text" id="studentsToAsk" name="studentsToAsk" class="large-input" />
+    </div>
 
-  <article>
-    <p> In here I will be putting information and videos explaining each part of this program.</p>
-  </article>
-</section>
+    <!-- Activity Information table (5 rows) -->
+    <div class="section">
+      <h2>Activity Information</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 20%;">Activity Goal Area</th>
+            <th style="width: 20%;">Staff Capacity Building needed</th>
+            <th style="width: 20%;">By Whom</th>
+            <th style="width: 10%;">Applicable?</th>
+            <th style="width: 30%;">Brief Description of activity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Row 1 -->
+          <tr>
+            <td><input type="text" id="goal1" name="goal1" class="small-input" /></td>
+            <td><input type="text" id="capacity1" name="capacity1" class="small-input" /></td>
+            <td><input type="text" id="bywhom1" name="bywhom1" class="small-input" /></td>
+            <td>
+              <select id="applicable1" name="applicable1" class="small-input">
+                <option value="">Choose an item</option>
+                <option>Yes</option>
+                <option>No</option>
+              </select>
+            </td>
+            <td><textarea id="desc1" name="desc1" class="large-input"></textarea></td>
+          </tr>
+          <!-- Row 2 -->
+          <tr>
+            <td><input type="text" id="goal2" name="goal2" class="small-input" /></td>
+            <td><input type="text" id="capacity2" name="capacity2" class="small-input" /></td>
+            <td><input type="text" id="bywhom2" name="bywhom2" class="small-input" /></td>
+            <td>
+              <select id="applicable2" name="applicable2" class="small-input">
+                <option value="">Choose an item</option>
+                <option>Yes</option>
+                <option>No</option>
+              </select>
+            </td>
+            <td><textarea id="desc2" name="desc2" class="large-input"></textarea></td>
+          </tr>
+          <!-- Row 3 -->
+          <tr>
+            <td><input type="text" id="goal3" name="goal3" class="small-input" /></td>
+            <td><input type="text" id="capacity3" name="capacity3" class="small-input" /></td>
+            <td><input type="text" id="bywhom3" name="bywhom3" class="small-input" /></td>
+            <td>
+              <select id="applicable3" name="applicable3" class="small-input">
+                <option value="">Choose an item</option>
+                <option>Yes</option>
+                <option>No</option>
+              </select>
+            </td>
+            <td><textarea id="desc3" name="desc3" class="large-input"></textarea></td>
+          </tr>
+          <!-- Row 4 -->
+          <tr>
+            <td><input type="text" id="goal4" name="goal4" class="small-input" /></td>
+            <td><input type="text" id="capacity4" name="capacity4" class="small-input" /></td>
+            <td><input type="text" id="bywhom4" name="bywhom4" class="small-input" /></td>
+            <td>
+              <select id="applicable4" name="applicable4" class="small-input">
+                <option value="">Choose an item</option>
+                <option>Yes</option>
+                <option>No</option>
+              </select>
+            </td>
+            <td><textarea id="desc4" name="desc4" class="large-input"></textarea></td>
+          </tr>
+          <!-- Row 5 -->
+          <tr>
+            <td><input type="text" id="goal5" name="goal5" class="small-input" /></td>
+            <td><input type="text" id="capacity5" name="capacity5" class="small-input" /></td>
+            <td><input type="text" id="bywhom5" name="bywhom5" class="small-input" /></td>
+            <td>
+              <select id="applicable5" name="applicable5" class="small-input">
+                <option value="">Choose an item</option>
+                <option>Yes</option>
+                <option>No</option>
+              </select>
+            </td>
+            <td><textarea id="desc5" name="desc5" class="large-input"></textarea></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-<footer>
-  <p>Contact information</p>
-</footer>
+    <button type="button" class="download-btn" id="downloadBtn">
+      Download Filled Form as Word
+    </button>
+  </form>
 
+  <script>
+    // Using docx (UMD) from CDN as `docx`
+    const {
+      Document,
+      Packer,
+      Paragraph,
+      TextRun,
+      ContentControl,
+      Table,
+      TableRow,
+      TableCell,
+      WidthType,
+    } = docx;
 
+    // Auto‐set “start” date to today
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById("projectDateStart").value = today;
 
+    document.getElementById("downloadBtn").addEventListener("click", () => {
+      // 1) Gather values from the form
+      const fld = (id) => document.getElementById(id).value || "";
 
+      const studentInterest = fld("studentInterest");
+      const projectName = fld("projectName");
+      const startDate = fld("projectDateStart");
+      const endDate = fld("projectDateEnd");
+      let projectDateRange = "";
+      if (startDate && endDate) {
+        projectDateRange = `${startDate} to ${endDate}`;
+      } else if (startDate) {
+        projectDateRange = startDate;
+      }
+
+      // Table rows data:
+      const rowsData = [
+        ["ADST", fld("adstBigIdea"), fld("adstCC")],
+        ["Arts Education", fld("artsBigIdea"), fld("artsCC")],
+        ["English Language Arts", fld("elaBigIdea"), fld("elaCC")],
+        ["Mathematics", fld("mathBigIdea"), fld("mathCC")],
+        ["Physical and Health Education", fld("pheBigIdea"), fld("pheCC")],
+        ["Science", fld("scienceBigIdea"), fld("scienceCC")],
+        ["Social Studies", fld("socialBigIdea"), fld("socialCC")],
+      ];
+
+      const considerations = fld("considerations");
+      const materials = fld("materials");
+      const vocabulary = fld("vocabulary");
+
+      const comms1 = fld("comms1");
+      const comms2 = fld("comms2");
+      const comms3 = fld("comms3");
+      const commsOther = fld("commsOther");
+
+      // Peer involvement (collect checked + "other" text)
+      const peerInvolve = [];
+      if (document.getElementById("peerClassroom").checked)
+        peerInvolve.push("Classroom");
+      if (document.getElementById("peerHallway").checked)
+        peerInvolve.push("Hallway");
+      if (document.getElementById("peerOther").checked)
+        peerInvolve.push("Other: " + fld("peerOtherText"));
+
+      const studentsToAsk = fld("studentsToAsk");
+
+      // Activity rows (5 rows)
+      const activities = [];
+      for (let i = 1; i <= 5; i++) {
+        activities.push([
+          fld(`goal${i}`),
+          fld(`capacity${i}`),
+          fld(`bywhom${i}`),
+          fld(`applicable${i}`),
+          fld(`desc${i}`),
+        ]);
+      }
+
+      // 2) Build the Word document
+      const doc = new Document();
+
+      doc.addSection({
+        properties: {},
+        children: [
+          // Title
+          new Paragraph({
+            children: [
+              new TextRun({
+                text: "Curriculum Planning Based on Student Interest",
+                bold: true,
+                size: 28,
+              }),
+            ],
+          }),
+          new Paragraph({ children: [] }),
+          // Project Name
+          new Paragraph({
+            children: [
+              new TextRun({ text: "Project Name: ", bold: true }),
+              new ContentControl({
+                tag: "projectName",
+                alias: "Project Name",
+                children: [new TextRun(projectName)],
+              }),
+            ],
+          }),
+          // Project Date Range
+          new Paragraph({
+            children: [
+              new TextRun({ text: "Project Date: ", bold: true }),
+              new ContentControl({
+                tag: "projectDate",
+                alias: "Project Date",
+                children: [new TextRun(projectDateRange)],
+              }),
+            ],
+          }),
+          // Student Interest
+          new Paragraph({
+            children: [
+              new TextRun({ text: "Student Interest: ", bold: true }),
+              new ContentControl({
+                tag: "studentInterest",
+                alias: "Student Interest",
+                children: [new TextRun(studentInterest)],
+              }),
+            ],
+          }),
+          new Paragraph({ children: [] }),
+
+          // Subject‐Big Idea‐Competencies table header
+          Table.create({
+            rows: [
+              new TableRow({
+                children: [
+                  new TableCell({
+                    width: { size: 15, type: WidthType.PERCENTAGE },
+                    children: [new Paragraph("Subject area")],
+                  }),
+                  new TableCell({
+                    width: { size: 30, type: WidthType.PERCENTAGE },
+                    children: [new Paragraph("Big Idea(s)")],
+                  }),
+                  new TableCell({
+                    width: { size: 55, type: WidthType.PERCENTAGE },
+                    children: [new Paragraph("Curricular Competencies")],
+                  }),
+                ],
+              }),
+              // Table rows (7 subjects)
+              ...rowsData.map(
+                ([subj, bigIdea, cc]) =>
+                  new TableRow({
+                    children: [
+                      new TableCell({
+                        children: [new Paragraph(subj)],
+                      }),
+                      new TableCell({
+                        children: [
+                          new ContentControl({
+                            tag: subj.replace(/\s+/g, "_") + "_BigIdea",
+                            alias: subj + " Big Idea",
+                            children: [new TextRun(bigIdea)],
+                          }),
+                        ],
+                      }),
+                      new TableCell({
+                        children: [
+                          new ContentControl({
+                            tag: subj.replace(/\s+/g, "_") + "_CC",
+                            alias: subj + " Curricular Competencies",
+                            children: [new TextRun(cc)],
+                          }),
+                        ],
+                      }),
+                    ],
+                  })
+              ),
+            ],
+          }),
+
+          new Paragraph({ children: [] }),
+
+          // Considerations
+          new Paragraph({
+            children: [
+              new TextRun({ text: "Considerations: ", bold: true }),
+              new ContentControl({
+                tag: "considerations",
+                alias: "Considerations",
+                children: [new TextRun(considerations)],
+              }),
+            ],
+          }),
+
+          // Materials/Resources
+          new Paragraph({
+            children: [
+              new TextRun({ text: "Materials/Resources Needed: ", bold: true }),
+              new ContentControl({
+                tag: "materials",
+                alias: "Materials/Resources",
+                children: [new TextRun(materials)],
+              }),
+            ],
+          }),
+
+          // Vocabulary to model
+          new Paragraph({
+            children: [
+              new TextRun({ text: "Vocabulary to model: ", bold: true }),
+              new ContentControl({
+                tag: "vocabulary",
+                alias: "Vocabulary to model",
+                children: [new TextRun(vocabulary)],
+              }),
+            ],
+          }),
+
+          new Paragraph({ children: [] }),
+
+          // Student Communication Systems
+          new Paragraph({
+            children: [
+              new TextRun({ text: "Student Communication Systems: ", bold: true }),
+              new ContentControl({
+                tag: "comms1",
+                alias: "Communication System 1",
+                children: [new TextRun(comms1)],
+              }),
+              new TextRun("    "),
+              new ContentControl({
+                tag: "comms2",
+                alias: "Communication System 2",
+                children: [new TextRun(comms2)],
+              }),
+              new TextRun("    "),
+              new ContentControl({
+                tag: "comms3",
+                alias: "Communication System 3",
+                children: [new TextRun(comms3)],
+              }),
+              new TextRun("    Other: "),
+              new ContentControl({
+                tag: "commsOther",
+                alias: "Communication Other",
+                children: [new TextRun(commsOther)],
+              }),
+            ],
+          }),
+
+          // Involving peers
+          new Paragraph({
+            children: [
+              new TextRun({ text: "Involving peers: ", bold: true }),
+              ...peerInvolve.map((p) =>
+                new TextRun({ text: p + "; ", break: 0 })
+              ),
+            ],
+          }),
+
+          // Students to ask
+          new Paragraph({
+            children: [
+              new TextRun({ text: "Students to ask: ", bold: true }),
+              new ContentControl({
+                tag: "studentsToAsk",
+                alias: "Students to ask",
+                children: [new TextRun(studentsToAsk)],
+              }),
+            ],
+          }),
+
+          new Paragraph({ children: [] }),
+
+          // Activity Information table header
+          new Paragraph({
+            children: [
+              new TextRun({ text: "Activity Information", bold: true, size: 24 }),
+            ],
+          }),
+          Table.create({
+            rows: [
+              new TableRow({
+                children: [
+                  new TableCell({ children: [new Paragraph("Activity Goal Area")] }),
+                  new TableCell({ children: [new Paragraph("Staff Capacity Building needed")] }),
+                  new TableCell({ children: [new Paragraph("By Whom")] }),
+                  new TableCell({ children: [new Paragraph("Applicable?")] }),
+                  new TableCell({ children: [new Paragraph("Brief Description of activity")] }),
+                ],
+              }),
+              // Five activity rows
+              ...activities.map(
+                (arr, idx) =>
+                  new TableRow({
+                    children: [
+                      new TableCell({
+                        children: [
+                          new ContentControl({
+                            tag: `goal_${idx + 1}`,
+                            alias: "Activity Goal Area",
+                            children: [new TextRun(arr[0])],
+                          }),
+                        ],
+                      }),
+                      new TableCell({
+                        children: [
+                          new ContentControl({
+                            tag: `capacity_${idx + 1}`,
+                            alias: "Staff Capacity",
+                            children: [new TextRun(arr[1])],
+                          }),
+                        ],
+                      }),
+                      new TableCell({
+                        children: [
+                          new ContentControl({
+                            tag: `bywhom_${idx + 1}`,
+                            alias: "By Whom",
+                            children: [new TextRun(arr[2])],
+                          }),
+                        ],
+                      }),
+                      new TableCell({
+                        children: [
+                          new ContentControl({
+                            tag: `applicable_${idx + 1}`,
+                            alias: "Applicable",
+                            children: [new TextRun(arr[3])],
+                          }),
+                        ],
+                      }),
+                      new TableCell({
+                        children: [
+                          new ContentControl({
+                            tag: `desc_${idx + 1}`,
+                            alias: "Description",
+                            children: [new TextRun(arr[4])],
+                          }),
+                        ],
+                      }),
+                    ],
+                  })
+              ),
+            ],
+          }),
+        ],
+      });
+
+      // 3) Pack and download
+      Packer.toBlob(doc).then((blob) => {
+        const filename = "Curriculum_Planning.docx";
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
+    });
+  </script>
 </body>
 </html>
+
 
 
